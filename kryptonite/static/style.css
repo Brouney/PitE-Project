@@ -1,0 +1,84 @@
+@import url(https://fonts.googleapis.com/css?family=Fjalla+One);
+
+html, body {
+    font-family: 'Fjalla One', sans-serif;
+    margin: 0 auto;
+    padding-top: 00px;
+    background: #222629;
+    color: whitesmoke;
+}
+
+.main-container {
+    background: #474B4F;
+    min-height: 100vh;
+}
+
+.header-content {
+    overflow: auto;
+    height: 20vh;
+}
+
+.main-content {
+    overflow: auto;
+    min-height: 75vh;
+}
+
+.dropdown-menu {
+    background: #333333;
+}
+
+.dropdown-item.active, .dropdown-item:active, .dropdown-item:hover {
+    background-color: whitesmoke;
+}
+
+.container .dropdown .dropdown-menu .dropdown-item:hover a {
+    color: #333333;
+    text-shadow: 1px 0px 0px #333333;
+
+}
+
+
+button {
+    background: #333333;
+}
+
+.dropdown .btn {
+    background: #333333;
+}
+
+.container .dropdown .dropdown-menu li a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.container .dropdown .dropdown-menu a:hover {
+    color: #333333;
+}
+
+canvas {
+    background: #222629;
+    visibility: hidden;
+}
+
+.delete-button {
+    background: #2bad4e linear-gradient(to bottom, #2bad4e 5%, #173306 100%);
+    border-radius: 28px;
+    border: 1px solid #000000;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: "DejaVu Sans", serif;
+    font-size: 16px;
+    padding: 12px 26px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #2f6627;
+}
+
+.delete-button:hover {
+    background: #173306 linear-gradient(to bottom, #173306 5%, #2bad4e 100%);
+}
+
+.delete-button:active {
+    position: relative;
+    top: 1px;
+}

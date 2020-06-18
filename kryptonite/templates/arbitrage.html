@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div>
+            <h1>
+                Virtual Arbitrage
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <form method="post">
+                    {% csrf_token %}
+                    {% load bootstrap4 %}
+                    {% bootstrap_form form %}
+                    <button class="btn btn-dark" type="submit">Find arbitrage</button>
+                </form>
+            </div>
+            <div class="col-md-9">
+                <div style="padding: 10px 10px 10px 30px;">
+                    <canvas id="resultsChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <br>
+        {% if show_result %}
+            <div class="row">
+                <h3>Arbitrage result:</h3>
+            </div>
+            <div>
+                <div class="results">
+                    <br>
+                    {% if result %}
+                        <h4>Time: {{ result.time }}</h4>
+                        <h4>Started with: {{ result.start_value }}</h4>
+                        <h4>Ended with: {{ result.value }}</h4>
+                        <br>
+                        <table class="results-table">
+                            <tr>
+                                <td>Starting currency</td>
+                                <td></td>
+                                <td class="text-background">{{ result.exchanges.0 }}</td>
+                                <td></td>
+                                <td class="text-background">{{ result.exchanges.1 }}</td>
+                                <td></td>
+                                <td class="text-background">{{ result.exchanges.2 }}</td>
+                            </tr>
+                            <tr class="above-arrow">
+                                <td></td>
+                                <td>{{ result.rates.0 }} {% if result.fees %} <br> - {{ result.fees.0 }} % {% endif %}</td>
+                                <td></td>
+                                <td>{{ result.rates.1 }} {% if result.fees %} <br> - {{ result.fees.1 }} % {% endif %}</td>
+                                <td></td>
+                                <td>{{ result.rates.2 }} {% if result.fees %} <br> - {{ result.fees.2 }} % {% endif %}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="circle">
+                                    <div class="text-circle">{{ result.start_currency }}</div>
+                                </td>
+                                <td class="arrow">&#8594;</td>
+                                <td class="circle">
+                                    <div class="text-circle">{{ result.currencies.0 }}</div>
+                                </td>
+                                <td class="arrow">&#8594;</td>
+                                <td class="circle">
+                                    <div class="text-circle">{{ result.currencies.1 }}</div>
+                                </td>
+                                <td class="arrow">&#8594;</td>
+                                <td class="circle">
+                                    <div class="text-circle">{{ result.currencies.2 }}</div>
+                                </td>
+                            </tr>
+                        </table>
+                    {% else %}
+                        <h3>Could not find any profitable transaction</h3>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {{ historic_results|json_script:"results_data" }}
+    {{ form.media }}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'arbitrage_style.css' %}">
+    <script src={% static 'arbitrage_results.js' %}></script>
+{% endblock %}
